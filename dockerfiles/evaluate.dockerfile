@@ -8,17 +8,14 @@ RUN apt update && \
 # Upgrade pip before installation
 RUN python -m pip install --upgrade pip
 
-# COPY application,
+# COPY application
 COPY src/ src/
-#can be shared by the host and the following command aren't requried
 COPY data/ data/
 COPY requirements.txt requirements.txt
 COPY requirements_dev.txt requirements_dev.txt
 #COPY README.md README.md
 COPY pyproject.toml pyproject.toml
-#Create path for saving models and figures, 
-RUN mkdir models
-RUN mkdir -p reports/figures
+# Create path for saving models and figures
 
 # set working dicrectory
 WORKDIR /
@@ -28,4 +25,4 @@ WORKDIR /
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
 RUN pip install . --no-deps --no-cache-dir --verbose
 
-ENTRYPOINT ["python", "-u", "src/exercise_mlops/train.py"]
+ENTRYPOINT ["python", "-u", "src/exercise_mlops/evaluate.py"]
