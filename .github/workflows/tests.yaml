@@ -29,8 +29,8 @@ jobs:
           python -m pip install -U pip setuptools wheel
           if [ $RUNNER_OS == 'Linux' ] || [ $RUNNER_OS == 'Windows' ]; then
             pip install -r requirements.txt
-          elif [ $RUNNER_OS == 'macOS' ]; then
-            pip install -r requirements_macos.txt
+          # elif [ $RUNNER_OS == 'macOS' ]; then
+          #   pip install -r requirements_macos.txt
           fi
           pip list
 
