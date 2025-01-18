@@ -6,4 +6,5 @@ typer
 torch
 torchvision
 torchaudio
-
+dvc
+dvc-gs
