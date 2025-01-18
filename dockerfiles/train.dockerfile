@@ -1,5 +1,6 @@
 # Base image
-FROM python:3.11-slim AS base
+#FROM python:3.11-slim AS base
+FROM nvcr.io/nvidia/pytorch:22.12-py3
 
 RUN apt update && \
     apt install --no-install-recommends -y build-essential gcc && \
