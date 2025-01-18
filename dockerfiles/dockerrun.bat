@@ -1,0 +1,1 @@
+docker run --rm -it -v %cd%/data:/data/ -v %cd%/models:/models/ train:latest

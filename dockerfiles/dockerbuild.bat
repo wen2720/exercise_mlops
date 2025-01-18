@@ -1,0 +1,1 @@
+docker build -f dockerfiles/train.dockerfile . -t corruptmnist:latest
