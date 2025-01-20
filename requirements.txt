@@ -1,9 +1,13 @@
+--extra-index-url https://pypi.org/simple
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch
+torchvision
+torchaudio
 invoke
 matplotlib
 my_project_name
 scikit_learn
 typer
-torch
-torchvision
-torchaudio
-
+dvc
+dvc-gs
+protobuf

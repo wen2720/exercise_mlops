@@ -5,7 +5,7 @@ from data import corrupt_mnist
 from model import MyAwesomeModel
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
-
+print(f"Training on {DEVICE}")
 
 def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 10) -> None:
     """Train a model on MNIST."""
@@ -39,13 +39,13 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 10) -> None:
                 print(f"Epoch {epoch}, iter {i}, loss: {loss.item()}")
 
     print("Training complete")
-    torch.save(model.state_dict(), "models/model.pth")
+    torch.save(model.state_dict(), "models/corruptmnist/model.pth")
     fig, axs = plt.subplots(1, 2, figsize=(15, 5))
     axs[0].plot(statistics["train_loss"])
     axs[0].set_title("Train loss")
     axs[1].plot(statistics["train_accuracy"])
     axs[1].set_title("Train accuracy")
-    fig.savefig("reports/figures/training_statistics.png")
+    fig.savefig("reports/figures/corruptmnist/training_statistics.png")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,6 @@
+[core]
+    remote = remote_storage
+    autostage = true
+['remote "remote_storage"']
+    url = gs://kaggle-leaves/
+    version_aware = true

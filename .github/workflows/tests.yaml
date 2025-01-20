@@ -1,33 +1,31 @@
-jobs:
-  test:
-    runs-on: ${{ matrix.operating-system }}
-    strategy:
-      matrix:
-        operating-system: ["ubuntu-latest", "windows-latest", "macos-latest"]
-        python-version: ["3.12", "3.11"]
+name: Run tests
 
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  template:
+    name: Run tests
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
           cache: 'pip'
           cache-dependency-path: setup.py
 
       - name: Install dependencies
         run: |
-          python -m pip install -U pip setuptools wheel
-          if [ $RUNNER_OS == 'Linux' ] || [ $RUNNER_OS == 'Windows' ]; then
-            pip install -r requirements.txt
-          elif [ $RUNNER_OS == 'macOS' ]; then
-            pip install -r requirements_macos.txt
-          fi
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
           pip list
 
-      - name: Run tests & coverage
+      - name: Run tests
         run: |
-          coverage run -m pytest tests/
-          coverage report -m
+          pytest tests/
