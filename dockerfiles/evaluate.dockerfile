@@ -27,6 +27,6 @@ COPY requirements_dev.txt requirements_dev.txt
 #RUN pip install -r requirements.txt --no-cache-dir --verbose
 #RUN pip install . --no-deps --no-cache-dir --verbose
 # Use cache in case there're large packages
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+#RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
 
 ENTRYPOINT ["python", "-u", "src/exercise_mlops/evaluate.py"]

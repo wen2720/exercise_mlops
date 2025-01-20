@@ -178,4 +178,5 @@ cython_debug/
 
 data
 models
-figures
+reports
+key
