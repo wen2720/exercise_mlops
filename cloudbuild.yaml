@@ -1,21 +1,42 @@
+# steps:
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: 'Build container image'
+#   args: [
+#     'build',
+#     '-f',
+#     '/dockerfiles/train.dockerfile',
+#     '-t',
+#     '${_IMAGE_NAME}',
+#     '.',
+#   ]
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: 'Push container image'
+#   args: [
+#     'push',
+#     '${_IMAGE_NAME}'
+#   ]
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+# substitutions:
+#   _IMAGE_NAME: 'europe-west4-docker.pkg.dev/dtup-mlop/corruptmnist/corruptmnist:latest'
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  id: 'Build container image'
-  args: [
-    'build',
-    '-f',
-    '/dockerfiles/train.dockerfile',
-    '-t',
-    '${_IMAGE_NAME}',
-    '.',
-  ]
-- name: 'gcr.io/cloud-builders/docker'
-  id: 'Push container image'
-  args: [
-    'push',
-    '${_IMAGE_NAME}'
-  ]
-options:
-  logging: CLOUD_LOGGING_ONLY
-substitutions:
-  _IMAGE_NAME: 'europe-west4-docker.pkg.dev/dtup-mlop/corruptmnist/corruptmnist:latest'
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    env:
+      - 'DOCKER_BUILDKIT=1'
+    args:
+      - 'build'
+      - '-f'
+      - 'dockerfiles/train.dockerfile'
+      - '-t'
+      - 'europe-west4-docker.pkg.dev/dtup-mlop/corruptmnist/corruptmnist:latest'
+      - '.'
+  
+  # Step 2: Push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-west4-docker.pkg.dev/dtup-mlop/corruptmnist/corruptmnist:latest'
+
+images:
+  - 'europe-west4-docker.pkg.dev/dtup-mlop/corruptmnist/corruptmnist:latest'
