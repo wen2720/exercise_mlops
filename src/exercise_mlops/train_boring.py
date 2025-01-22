@@ -13,12 +13,6 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     print("Training day and night")
     print(f"{lr=}, {batch_size=}, {epochs=}")
 
-    wandb.init(
-        project="corrupt_mnist",
-        config={"lr": lr, "batch_size": batch_size, "epochs": epochs},
-    )
-
-
     model = MyAwesomeModel().to(DEVICE)
     train_set, _ = corrupt_mnist()
 
@@ -44,8 +38,7 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
             statistics["train_accuracy"].append(accuracy)
 
             if i % 100 == 0:
-                #print(f"Epoch {epoch}, iter {i}, loss: {loss.item()}")
-                wandb.log({"Epoch": epoch, "iter": i, "loss": loss.item()})
+                print(f"Epoch {epoch}, iter {i}, loss: {loss.item()}")
             
 
     print("Training complete")

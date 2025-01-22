@@ -180,3 +180,5 @@ data
 models
 reports
 key
+src/exercise_mlops/profiling
+wandb

@@ -4,6 +4,7 @@
 ::docker build --progress=plain -f dockerfiles/train.dockerfile -t corruptmnist:latest .
 
 ::1. local, build docker image with the command defined in the file, for local development
+pipreqs
 docker build -f dockerfiles/train.dockerfile -t corruptmnist:latest .
 
 ::2. remote, building image for GCP
